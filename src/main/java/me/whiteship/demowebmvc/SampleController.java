@@ -7,9 +7,15 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/hello")
 public class SampleController {
 
-    @RequestMapping("/{name:[a-z]+}")
+    @RequestMapping("/Sujin")
     @ResponseBody
-    public String hello(@PathVariable String name) {
-        return "hello" + name;
+    public String helloSujin() {
+        return "hello Sujin" ;
+    }
+
+    @RequestMapping("/**")
+    @ResponseBody
+    public String hello() {
+        return "hello" ;
     }
 }

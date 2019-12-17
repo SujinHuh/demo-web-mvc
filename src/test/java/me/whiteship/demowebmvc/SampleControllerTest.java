@@ -9,8 +9,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
 @RunWith(SpringRunner.class)
@@ -24,10 +23,12 @@ class SampleControllerTest {
     @Test
     public void hello() throws Exception {
 
-        mockMvc.perform(get("/hello/sujin"))
+        mockMvc.perform(get("/hello/Sujin"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().string("hellosujin"))
+                .andExpect(content().string("hello Sujin"))
+                .andExpect(handler().handlerType(SampleController.class))
+                .andExpect(handler().methodName("helloSujin"))
         ;
     }
 }
