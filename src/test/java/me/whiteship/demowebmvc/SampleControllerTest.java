@@ -24,9 +24,10 @@ class SampleControllerTest {
     @Test
     public void hello() throws Exception {
 
-        mockMvc.perform(get("/hello/1234/45"))
+        mockMvc.perform(get("/hello/sujin"))
                 .andDo(print())
                 .andExpect(status().isOk())
+                .andExpect(content().string("hellosujin"))
         ;
     }
 }
