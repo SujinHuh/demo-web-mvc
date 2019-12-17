@@ -13,9 +13,4 @@ public class SampleController {
         return "hello Sujin" ;
     }
 
-    @RequestMapping("/**")
-    @ResponseBody
-    public String hello() {
-        return "hello" ;
-    }
 }

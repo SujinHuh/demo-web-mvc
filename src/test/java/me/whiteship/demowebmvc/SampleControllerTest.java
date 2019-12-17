@@ -26,9 +26,6 @@ class SampleControllerTest {
         mockMvc.perform(get("/hello/Sujin"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().string("hello Sujin"))
-                .andExpect(handler().handlerType(SampleController.class))
-                .andExpect(handler().methodName("helloSujin"))
         ;
     }
 }
