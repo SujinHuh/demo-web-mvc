@@ -22,7 +22,7 @@ public class SampleControllerTest {
 
     @Test
     public void getEvent() throws Exception {
-        mockMvc.perform(get("/events/1"))
+        mockMvc.perform(get("/events/1;name=Sujin"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("id").value(1))
