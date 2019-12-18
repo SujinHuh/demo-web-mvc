@@ -26,7 +26,7 @@ class SampleControllerTest {
     public void hello() throws Exception {
 
         mockMvc.perform(get("/hello")
-                .header(HttpHeaders.FROM,"Lcoalhost"))
+                .param("name","Sujin"))
                 .andDo(print())
                 .andExpect(status().isOk())
         ;

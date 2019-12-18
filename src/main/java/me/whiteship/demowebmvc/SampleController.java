@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping
 public class SampleController {
 
-    @RequestMapping(value = "/hello",headers = HttpHeaders.FROM)
+    @RequestMapping(value = "/hello",params = "name=Sujin")
     @ResponseBody
     public String hello() {
         return "hello" ;
