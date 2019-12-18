@@ -9,9 +9,15 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping
 public class SampleController {
 
-    @RequestMapping(value = "/hello",params = "name=Sujin")
+    @GetMapping("/hello")
     @ResponseBody
-    public String hello() {
+    public String helloGet() {
+        return "hello" ;
+    }
+
+    @PostMapping("/hello")
+    @ResponseBody
+    public String helloPost() {
         return "hello" ;
     }
 
