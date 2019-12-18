@@ -1,24 +1,20 @@
 package me.whiteship.demowebmvc;
 
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @Controller
-@RequestMapping
 public class SampleController {
 
-    @GetMapping("/hello")
+    @GetMapping("/events/{id}")
     @ResponseBody
-    public String helloGet() {
-        return "hello" ;
-    }
+    public Event getEvent (@PathVariable Integer id){
 
-    @PostMapping("/hello")
-    @ResponseBody
-    public String helloPost() {
-        return "hello" ;
+        Event event = new Event();
+        event.setId(id);
+        return event;
     }
 
 }
