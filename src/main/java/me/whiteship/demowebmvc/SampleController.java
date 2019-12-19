@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
@@ -22,7 +23,7 @@ public class SampleController {
 
     @PostMapping("/events")
     @ResponseBody
-    public Event getEvent(@ModelAttribute Event event ,BindingResult bindingResult){
+    public Event getEvent(@Valid @ModelAttribute Event event , BindingResult bindingResult){
 
        if(bindingResult.hasErrors()){
            System.out.println("====에러 목록================================================");
