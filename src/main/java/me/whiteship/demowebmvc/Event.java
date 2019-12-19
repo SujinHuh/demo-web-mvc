@@ -7,6 +7,7 @@ public class Event {
     private String name;
 
     private Integer limit;
+
     public Integer getId() {
         return id;
     }
