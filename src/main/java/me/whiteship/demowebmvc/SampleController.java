@@ -23,16 +23,13 @@ public class SampleController {
     }
 
     @PostMapping("/events")
-    @ResponseBody
-    public Event getEvent(@Validated(Event.ValidateLimit.class) @ModelAttribute Event event , BindingResult bindingResult){
+    public String getEvent(@Validated @ModelAttribute Event event,
+                           BindingResult bindingResult){
 
        if(bindingResult.hasErrors()){
-           System.out.println("====에러 목록================================================");
-           bindingResult.getAllErrors().forEach(c->{
-               System.out.println(c.toString());
-           });
+           return "/events/form";
         }
-        return event;
+        return "/events/list";
     }
 
 }
