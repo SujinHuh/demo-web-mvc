@@ -13,15 +13,15 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
+@SessionAttributes("event")
 public class SampleController {
 
     @GetMapping("/events/form")
-    public String eventForm(Model model, HttpSession httpSession) {
+    public String eventForm(Model model) {
 
         Event newEvent = new Event();
         newEvent.setLimit(30);
         model.addAttribute("event",newEvent);
-        httpSession.setAttribute("event",newEvent);
         return "/events/form";
     }
 
