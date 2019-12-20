@@ -7,6 +7,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -23,13 +25,30 @@ public class SampleController {
     }
 
     @PostMapping("/events")
-    public String getEvent(@Validated @ModelAttribute Event event,
+    public String createEvent(@Validated @ModelAttribute Event event,
                            BindingResult bindingResult){
 
        if(bindingResult.hasErrors()){
            return "/events/form";
         }
-        return "/events/list";
+    //save
+//       List<Event> eventList = new ArrayList<>();
+//       eventList.add(event);
+//       model.addAttribute("eventList",eventList);
+
+        return "redirect:/events/list";
     }
 
+    @GetMapping("/events/list")
+    public String getEvent(Model model) {
+
+        Event event = new Event();
+        event.setName("Sujin");
+        event.setLimit(10);
+
+        List<Event> eventList = new ArrayList<>();
+        eventList.add(event);
+        model.addAttribute("eventList", eventList);
+        return "/events/list";
+    }
 }
