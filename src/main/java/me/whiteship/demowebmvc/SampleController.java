@@ -6,6 +6,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,12 +16,12 @@ import java.util.Optional;
 public class SampleController {
 
     @GetMapping("/events/form")
-    public String eventForm(Model model) {
+    public String eventForm(Model model, HttpSession httpSession) {
 
         Event newEvent = new Event();
         newEvent.setLimit(30);
         model.addAttribute("event",newEvent);
-
+        httpSession.setAttribute("event",newEvent);
         return "/events/form";
     }
 
@@ -42,12 +43,13 @@ public class SampleController {
     @GetMapping("/events/list")
     public String getEvent(Model model) {
 
-        Event event = new Event();
-        event.setName("Sujin");
-        event.setLimit(10);
+        Event newEvent = new Event();
+        newEvent.setName("Sujin");
+        newEvent.setLimit(10);
+
 
         List<Event> eventList = new ArrayList<>();
-        eventList.add(event);
+        eventList.add(newEvent);
         model.addAttribute("eventList", eventList);
         return "/events/list";
     }

@@ -1,6 +1,7 @@
 package me.whiteship.demowebmvc;
 
 
+import org.hibernate.validator.internal.constraintvalidators.bv.NotNullValidator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +11,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.constraints.NotNull;
 import java.util.Map;
 
+import static org.hamcrest.Matchers.notNullValue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -25,22 +28,23 @@ public class SampleControllerTest {
     MockMvc mockMvc;
 
     @Test
-    public void postEvent() throws Exception {
-        mockMvc.perform(post("/events")
-                .param("name","Sujin")
-                .param("limit", "-12"))
+    public void eventForm() throws Exception {
+        mockMvc.perform(get("/events/form"))
                 .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(model().hasErrors())
+                .andExpect(view().name("/events/form"))
+                .andExpect(model().attributeExists("event"))
+                .andExpect(request().sessionAttribute("event",notNullValue()))
         ;
     }
 
     @Test
-    public void eventForm() throws Exception {
-        ResultActions result = mockMvc.perform(get("/events/form"))
+    public void postEvent() throws Exception {
+        ResultActions result = mockMvc.perform(get("/events/form")
+                .param("name", "Sujin")
+                .param("limit", "-12"))
                 .andDo(print())
-                .andExpect(view().name("/events/form"))
-                .andExpect(model().attributeExists("event"));
+                .andExpect(status().isOk())
+                .andExpect(model().hasErrors());
         ModelAndView modelAndView = result.andReturn().getModelAndView();
         Map<String, Object> model = modelAndView.getModel();
         System.out.println(model.size());
