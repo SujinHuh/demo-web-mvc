@@ -17,31 +17,43 @@ import java.util.Optional;
 @SessionAttributes("event")
 public class SampleController {
 
-    @GetMapping("/events/form")
-    public String eventForm(Model model) {
+    @GetMapping("/events/form/name")
+    public String eventFormName(Model model) {
 
-        Event newEvent = new Event();
-        newEvent.setLimit(30);
-        model.addAttribute("event",newEvent);
-        return "/events/form";
+        model.addAttribute("event", new Event());
+        return "/events/form-name";
     }
 
-    @PostMapping("/events")
-    public String createEvent(@Validated @ModelAttribute Event event,
-                           BindingResult bindingResult,
-                            SessionStatus sessionStatus){
+    @PostMapping("/events/form/name")
+    public String evnetsFormNameSubmit(@Validated @ModelAttribute Event event,
+                                  BindingResult bindingResult) {
 
-       if(bindingResult.hasErrors()){
-           return "/events/form";
+        if (bindingResult.hasErrors()) {
+            return "/events/form-name";
         }
-    //save
-//       List<Event> eventList = new ArrayList<>();
-//       eventList.add(event);
-//       model.addAttribute("eventList",eventList);
 
+        return "redirect:/events/form/limit";
+    }
+
+    @GetMapping("/events/form/limit")
+    public String eventFormLime(@ModelAttribute Event event, Model model) {
+
+        model.addAttribute("event", event);
+        return "/events/form-limit";
+    }
+
+    @PostMapping("/events/form/limit")
+    public String evnetsFormLimeSubmit(@Validated @ModelAttribute Event event,
+                                       BindingResult bindingResult,
+                                        SessionStatus sessionStatus) {
+
+        if (bindingResult.hasErrors()) {
+            return "/events/form-limit";
+        }
         sessionStatus.setComplete();
         return "redirect:/events/list";
     }
+
 
     @GetMapping("/events/list")
     public String getEvent(Model model) {
