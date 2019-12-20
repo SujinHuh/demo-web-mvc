@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -27,7 +28,8 @@ public class SampleController {
 
     @PostMapping("/events")
     public String createEvent(@Validated @ModelAttribute Event event,
-                           BindingResult bindingResult){
+                           BindingResult bindingResult,
+                            SessionStatus sessionStatus){
 
        if(bindingResult.hasErrors()){
            return "/events/form";
@@ -37,6 +39,7 @@ public class SampleController {
 //       eventList.add(event);
 //       model.addAttribute("eventList",eventList);
 
+        sessionStatus.setComplete();
         return "redirect:/events/list";
     }
 
