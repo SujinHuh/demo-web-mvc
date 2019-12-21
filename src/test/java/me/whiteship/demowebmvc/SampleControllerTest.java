@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import java.util.Map;
 
 import static org.hamcrest.Matchers.notNullValue;
@@ -51,6 +52,22 @@ public class SampleControllerTest {
         ModelAndView modelAndView = result.andReturn().getModelAndView();
         Map<String, Object> model = modelAndView.getModel();
         System.out.println(model.size());
+
+    }
+
+    @Test
+    public void getEvent() throws Exception {
+
+        Event newEvent = new Event();
+        newEvent.setName("Spring Gooooooo!!");
+        newEvent.setLimit(103);
+
+        mockMvc.perform(get("/events/list")
+                .sessionAttr("visitTime", LocalDateTime.now())
+                .flashAttr("newEvent", newEvent))
+                .andDo(print())
+                .andExpect(status().isOk())
+        ;
 
     }
 }
