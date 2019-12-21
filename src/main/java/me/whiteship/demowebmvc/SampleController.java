@@ -9,6 +9,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -56,8 +57,9 @@ public class SampleController {
 
 
     @GetMapping("/events/list")
-    public String getEvent(Model model) {
+    public String getEvent(Model model ,@SessionAttribute LocalDateTime visitTime) {
 
+        System.out.println(visitTime);
         Event newEvent = new Event();
         newEvent.setName("Sujin");
         newEvent.setLimit(10);
