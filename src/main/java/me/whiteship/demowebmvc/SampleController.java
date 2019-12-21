@@ -61,8 +61,7 @@ public class SampleController {
 
 
     @GetMapping("/events/list")
-    public String getEvent(@ModelAttribute("newEvent") Event event,
-                           Model model,
+    public String getEvent(Model model,
                            @SessionAttribute LocalDateTime visitTime) {
 
         System.out.println(visitTime);
@@ -72,9 +71,11 @@ public class SampleController {
         spring.setLimit(10);
 
 
+        Event newEvent = (Event) model.asMap().get("newEvent");
+
         List<Event> eventList = new ArrayList<>();
         eventList.add(spring);
-        eventList.add(event);
+        eventList.add(newEvent);
         model.addAttribute("eventList", eventList);
         return "/events/list";
     }
