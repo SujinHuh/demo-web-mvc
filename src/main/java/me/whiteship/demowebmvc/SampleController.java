@@ -28,7 +28,7 @@ public class SampleController {
 
     @PostMapping("/events/form/name")
     public String evnetsFormNameSubmit(@Validated @ModelAttribute Event event,
-                                  BindingResult bindingResult) {
+                                       BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             return "/events/form-name";
@@ -54,23 +54,32 @@ public class SampleController {
             return "/events/form-limit";
         }
 
-        attributes.addAttribute("name",event.getName());
-        attributes.addAttribute("limie",event.getLimit());
+        attributes.addAttribute("name", event.getName());
+        attributes.addAttribute("limit", event.getLimit());
         sessionStatus.setComplete();
         return "redirect:/events/list";
     }
 
 
     @GetMapping("/events/list")
-    public String getEvent(Model model ,@SessionAttribute LocalDateTime visitTime) {
+    public String getEvent(@RequestParam String name,
+                           @RequestParam Integer limit,
+                           Model model,
+                           @SessionAttribute LocalDateTime visitTime) {
 
         System.out.println(visitTime);
+
         Event newEvent = new Event();
-        newEvent.setName("Sujin");
-        newEvent.setLimit(10);
+        newEvent.setName(name);
+        newEvent.setLimit(limit);
+
+        Event event = new Event();
+        event.setName("Sujin");
+        event.setLimit(10);
 
 
         List<Event> eventList = new ArrayList<>();
+        eventList.add(event);
         eventList.add(newEvent);
         model.addAttribute("eventList", eventList);
         return "/events/list";
