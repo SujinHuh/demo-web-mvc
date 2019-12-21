@@ -53,10 +53,9 @@ public class SampleController {
         if (bindingResult.hasErrors()) {
             return "/events/form-limit";
         }
-
-        attributes.addAttribute("name", event.getName());
-        attributes.addAttribute("limit", event.getLimit());
         sessionStatus.setComplete();
+
+        attributes.addFlashAttribute("newEvent",event);
         return "redirect:/events/list";
     }
 
