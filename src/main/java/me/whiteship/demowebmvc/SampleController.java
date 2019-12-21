@@ -6,6 +6,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -46,15 +47,15 @@ public class SampleController {
     @PostMapping("/events/form/limit")
     public String evnetsFormLimeSubmit(@Validated @ModelAttribute Event event,
                                        BindingResult bindingResult,
-                                        SessionStatus sessionStatus,
-                                        Model model) {
+                                       SessionStatus sessionStatus,
+                                       RedirectAttributes attributes) {
 
         if (bindingResult.hasErrors()) {
             return "/events/form-limit";
         }
 
-        model.addAttribute("name",event.getName());
-        model.addAttribute("limit",event.getLimit());
+        attributes.addAttribute("name",event.getName());
+        attributes.addAttribute("limie",event.getLimit());
         sessionStatus.setComplete();
         return "redirect:/events/list";
     }
