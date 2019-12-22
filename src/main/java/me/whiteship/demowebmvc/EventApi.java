@@ -1,6 +1,7 @@
 package me.whiteship.demowebmvc;
 
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,6 @@ public class EventApi {
            ResponseEntity.badRequest();
            return ResponseEntity.badRequest().build();
         }
-        return ResponseEntity.ok(event);
+        return new ResponseEntity<Event>(event, HttpStatus.CREATED);
     }
 }
