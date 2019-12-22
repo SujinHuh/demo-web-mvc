@@ -18,22 +18,18 @@ import java.util.Optional;
 @Controller
 @SessionAttributes("event")
 public class EventController {
-// @ModelAttribute 1 방법
+
     @ModelAttribute
     public void categories(Model model) {
         model.addAttribute("categories",List.of("seminar","hobby","study"));
     }
-//// @ModelAttribute 2 방법
-//    @ModelAttribute("categories")
-//    public List<String> categories(Model model) {
-//      return List.of("seminar","hobby","study");
-//    }
+
 
     @GetMapping("/events/form/name")
-    public String eventFormName(Model model) {
+    @ModelAttribute
+    public Event eventFormName(Model model) {
 
-        model.addAttribute("event", new Event());
-        return "/events/form-name";
+        return new Event();
     }
 
     @PostMapping("/events/form/name")
