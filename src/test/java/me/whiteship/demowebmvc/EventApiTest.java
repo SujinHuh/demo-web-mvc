@@ -40,9 +40,8 @@ public class EventApiTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(json))
                 .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("name").value("Sujin"))
-                .andExpect(jsonPath("limit").value(-300))
+                .andExpect(status().isBadRequest())
+
         ;
     }
 
