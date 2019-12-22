@@ -32,7 +32,7 @@ public class EventApiTest {
 
         Event event = new Event();
         event.setName("Sujin");
-        event.setLimit(300);
+        event.setLimit(-300);
 
         String json = objectMapper.writeValueAsString(event);
 
@@ -42,7 +42,7 @@ public class EventApiTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("name").value("Sujin"))
-                .andExpect(jsonPath("limit").value(300))
+                .andExpect(jsonPath("limit").value(-300))
         ;
     }
 

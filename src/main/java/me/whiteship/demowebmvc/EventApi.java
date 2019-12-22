@@ -2,18 +2,25 @@ package me.whiteship.demowebmvc;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.MediaType;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/events")
 public class EventApi {
 
-    @GetMapping
-    public Event createEvent(HttpEntity<Event> requst) {
+    @PostMapping
+    public Event createEvent(@Valid @RequestBody Event event, BindingResult bindingResult) {
         //save
 
-        MediaType contentType = requst.getHeaders().getContentType();
-        System.out.println(contentType);
-       return requst.getBody();
+        if(bindingResult.hasErrors()) {
+            bindingResult.getAllErrors().forEach(error ->{
+                System.out.println(error);
+            });
+
+        }
+        return event;
     }
 }
