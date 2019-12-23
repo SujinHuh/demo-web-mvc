@@ -24,6 +24,7 @@ public class EventController {
     @InitBinder
     public void initEventBinder(WebDataBinder webDataBinder){
         webDataBinder.setDisallowedFields("id");
+        webDataBinder.addValidators(new EventValidator());
     }
 
     @ModelAttribute
