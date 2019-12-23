@@ -20,14 +20,8 @@ import java.util.Optional;
 @SessionAttributes("event")
 public class EventController {
 
-    @ExceptionHandler
-    public String eventErroHandler(EventException exception, Model model) {
-        model.addAttribute("message","Event error");
-        return "error";
-    }
-
-    @ExceptionHandler
-    public String runtimeErrorHandler(RuntimeException exception, Model model) {
+    @ExceptionHandler({EventException.class, RuntimeException.class})
+    public String eventErroHandler(RuntimeException exception, Model model) {
         model.addAttribute("message","runTime error");
         return "error";
     }
