@@ -26,6 +26,12 @@ public class EventController {
         return "error";
     }
 
+    @ExceptionHandler
+    public String runtimeErrorHandler(RuntimeException exception, Model model) {
+        model.addAttribute("message","runTime error");
+        return "error";
+    }
+
     @InitBinder("event")
     public void initEventBinder(WebDataBinder webDataBinder){
         webDataBinder.setDisallowedFields("id");
