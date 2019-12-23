@@ -20,6 +20,11 @@ import java.util.Optional;
 @SessionAttributes("event")
 public class EventController {
 
+    @ExceptionHandler
+    public String eventErroHandler(EventException exception, Model model) {
+        model.addAttribute("message","Event error");
+        return "error";
+    }
 
     @InitBinder("event")
     public void initEventBinder(WebDataBinder webDataBinder){
@@ -34,10 +39,10 @@ public class EventController {
 
 
     @GetMapping("/events/form/name")
-   // @ModelAttribute
     public String eventFormName(Model model) {
-        model.addAttribute("event",new Event());
-        return "/events/form-name";
+        throw new EventException();
+//        model.addAttribute("event",new Event());
+//        return "/events/form-name";
     }
 
     @PostMapping("/events/form/name")
