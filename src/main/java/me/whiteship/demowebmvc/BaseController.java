@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.util.List;
 
-@ControllerAdvice
+@ControllerAdvice(assignableTypes = {EventController.class,EventApi.class})
 public class BaseController {
 
 
