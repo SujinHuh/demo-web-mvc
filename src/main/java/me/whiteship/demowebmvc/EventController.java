@@ -20,23 +20,6 @@ import java.util.Optional;
 @SessionAttributes("event")
 public class EventController {
 
-    @ExceptionHandler({EventException.class, RuntimeException.class})
-    public String eventErroHandler(RuntimeException exception, Model model) {
-        model.addAttribute("message","runTime error");
-        return "error";
-    }
-
-    @InitBinder("event")
-    public void initEventBinder(WebDataBinder webDataBinder){
-        webDataBinder.setDisallowedFields("id");
-        webDataBinder.addValidators(new EventValidator());
-    }
-
-    @ModelAttribute
-    public void categories(Model model) {
-        model.addAttribute("categories",List.of("seminar","hobby","study"));
-    }
-
 
     @GetMapping("/events/form/name")
     public String eventFormName(Model model) {
